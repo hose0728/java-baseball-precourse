@@ -16,4 +16,9 @@ public class Application {
         }
         return stringBuilder.toString();
     }
+
+    public static String getInput() {
+        System.out.print("숫자를 입력해주세요 : ");
+        return readLine();
+    }
 }

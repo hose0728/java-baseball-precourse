@@ -1,6 +1,7 @@
 package baseball;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.io.ByteArrayInputStream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,15 @@ class ApplicationTest extends NsTest {
     void 랜덤숫자_테스트(){
         int randomNumber = Integer.parseInt(Application.getRandomNumber());
         assertThat(111<= randomNumber && randomNumber<=999).isTrue();
+    }
+
+    @Test
+    void 입력값_테스트(){
+        String test = "입력값 테스트";
+        final byte[] buf = String.join("\n", test).getBytes();
+        System.setIn(new ByteArrayInputStream(buf));
+        String input = Application.getInput();
+        assertThat(input).isEqualTo(test);
     }
 
     @Override
