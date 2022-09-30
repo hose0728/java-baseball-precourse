@@ -1,6 +1,7 @@
 package baseball;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
@@ -26,6 +27,12 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("1234"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 랜덤숫자_테스트(){
+        int randomNumber = Integer.parseInt(Application.getRandomNumber());
+        assertThat(111<= randomNumber && randomNumber<=999).isTrue();
     }
 
     @Override
