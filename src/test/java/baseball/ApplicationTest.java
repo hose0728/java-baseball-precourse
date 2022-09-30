@@ -2,13 +2,11 @@ package baseball;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.io.ByteArrayInputStream;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
@@ -35,6 +33,7 @@ class ApplicationTest extends NsTest {
     void 랜덤숫자_테스트(){
         int randomNumber = Integer.parseInt(Application.getRandomNumber());
         assertThat(111<= randomNumber && randomNumber<=999).isTrue();
+        System.out.println("randomNumber = " + randomNumber);
     }
 
     @Test
@@ -66,6 +65,12 @@ class ApplicationTest extends NsTest {
             Application.checkInput(testInput);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("입력값이 유효하지 않습니다.");
+    }
+
+    @Test
+    void 삼진아웃_테스트(){
+        Application.getStringResult("567","567");
+        assertThat(output()).contains("3스트라이크");
     }
 
     @Override
