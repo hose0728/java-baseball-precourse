@@ -104,7 +104,7 @@ public class Application {
             getStringResult(input, randNumber);
             if (get3Strike(input, randNumber)) {
                 if (!getContinue()) {
-                    System.exit(0);
+                    return;
                 }
                 randNumber = getRandomNumber();
             }
