@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
@@ -38,11 +39,33 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 입력값_테스트(){
-        String test = "입력값 테스트";
-        final byte[] buf = String.join("\n", test).getBytes();
+        String testInput = "입력값 테스트";
+        final byte[] buf = String.join("\n", testInput).getBytes();
         System.setIn(new ByteArrayInputStream(buf));
         String input = Application.getInput();
-        assertThat(input).isEqualTo(test);
+        assertThat(input).isEqualTo(testInput);
+    }
+
+    @Test
+    void 입력값_길이_유효성_테스트(){
+        String testInput = "1234";
+        final byte[] buf = String.join("\n", testInput).getBytes();
+        System.setIn(new ByteArrayInputStream(buf));
+        assertThatThrownBy(()-> {
+            Application.checkInput(testInput);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력값이 유효하지 않습니다.");
+    }
+
+    @Test
+    void 입력값_숫자_유효성_테스트(){
+        String testInput = "가나다";
+        final byte[] buf = String.join("\n", testInput).getBytes();
+        System.setIn(new ByteArrayInputStream(buf));
+        assertThatThrownBy(()-> {
+            Application.checkInput(testInput);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("입력값이 유효하지 않습니다.");
     }
 
     @Override

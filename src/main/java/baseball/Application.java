@@ -21,4 +21,24 @@ public class Application {
         System.out.print("숫자를 입력해주세요 : ");
         return readLine();
     }
+
+    public static void checkInput(String input) {
+        if (checkLength(input) || checkDigit(input)) {
+            throw new IllegalArgumentException("입력값이 유효하지 않습니다.");
+        }
+    }
+
+    private static boolean checkLength(String input) {
+        return input.length() != 3;
+    }
+
+    private static boolean checkDigit(String input) {
+        for (int i = 0; i < 3; i++) {
+            char now = input.charAt(i);
+            if (!Character.isDigit(now) || Character.getNumericValue(now) <= 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
